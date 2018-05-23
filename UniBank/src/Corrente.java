@@ -1,10 +1,10 @@
 
 public class Corrente extends Conta implements CaixaEletronico {
 	private double credito = 1000.00;
-	public Corrente(int numero, double saldo, String titular) {
-		setNumero(numero);
-		setSaldo(saldo);
-		setTitular(titular);
+	private double taxa = 0.45;
+	
+	public Corrente(int numero, double saldo, Cliente titular) {
+		super(numero, saldo, titular);
 	}
 
 	@Override
@@ -33,20 +33,27 @@ public class Corrente extends Conta implements CaixaEletronico {
 
 	@Override
 	public void depositar(Conta conta, double valor) {
-		// TODO Auto-generated method stub
-		
+		conta.setSaldo(getSaldo() + valor);
 	}
 
 	@Override
 	public void sacar(int valor) {
-		// TODO Auto-generated method stub
+		if (this.getSaldo() >= valor) {
+			this.setSaldo(getSaldo() - valor);
+		} else if (this.credito >= valor){
+			this.credito -= valor;
+			this.setSaldo(getSaldo() - valor);
+			System.out.println("Operação realizada com sucesso!");
+		}else {
+			System.out.println("Saldo insuficiente!");
+		}
 		
 	}
 	
 	public void calcularJuros() {
 		if (this.credito < 1000) {
 			double cred = 1000 - this.credito;
-			cred *= .45;
+			cred *= taxa;
 			setSaldo(getSaldo() - cred);
 		}
 	}

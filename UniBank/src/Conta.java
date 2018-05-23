@@ -1,17 +1,20 @@
 
-public abstract class Conta {
+public abstract class Conta implements CaixaEletronico {
 	private int numero;
 	private double saldo;
-	private String titular;
+	private Cliente titular;
+	public static int total;
 	
+	public Conta(int numero, double saldo, Cliente titular) {
+		Conta.total++;
+		this.numero = numero;
+		this.saldo = saldo;
+		this.titular = titular;
+	}
 	public int getNumero(){
 		return this.numero;
 	}
-	
-	public int setNumero(int num) {
-		return this.numero = num;
-	}
-	
+		
 	public double getSaldo() {
 		return saldo;
 	}
@@ -20,12 +23,8 @@ public abstract class Conta {
 		this.saldo = saldo;
 	}
 	
-	public String getTitular() {
+	public Cliente getTitular() {
 		return titular;
 	}
-	
-	public void setTitular(String titular) {
-		this.titular = titular;
-	}
-		
+			
 }

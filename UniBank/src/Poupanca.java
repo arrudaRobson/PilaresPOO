@@ -1,11 +1,10 @@
 
 public class Poupanca extends Conta implements CaixaEletronico {
-	public Poupanca(int numero, double saldo, String titular) {
-		setNumero(numero);
-		setSaldo(saldo);
-		setTitular(titular);
+
+	public Poupanca(int numero, double saldo, Cliente titular) {
+		super(numero, saldo, titular);
 	}
-	
+
 	public void transferir(Conta conta, double valor) {
 		if (getSaldo() >= valor) {
 			setSaldo(getSaldo() - valor);
